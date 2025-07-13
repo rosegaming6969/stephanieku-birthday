@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Love Quest - Happy Birthday Stephanieku</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff8dc;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      background-color: #fffbe6;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      color: #e0b000;
+      font-size: 2.2rem;
+    }
+    .question {
+      margin: 1.5rem 0;
+      text-align: left;
+    }
+    input[type="text"], select, input[type="range"] {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+      margin-top: 0.5rem;
+    }
+    button {
+      background-color: #ffd700;
+      color: #333;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .result {
+      margin-top: 2rem;
+      display: none;
+    }
+    .result img, .result audio, .result video {
+      max-width: 100%;
+      margin-top: 1rem;
+      border-radius: 1rem;
+    }
+    .love {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: red;
+      clip-path: path("M10 30 C 10 20, 0 20, 0 10 A 10 10 0 0 1 10 0 A 10 10 0 0 1 20 10 C 20 20, 10 20, 10 30 Z");
+      animation: float 10s linear infinite;
+      opacity: 0.3;
+      z-index: 0;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(1); opacity: 0.3; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+    .star {
+      position: fixed;
+      width: 3px;
+      height: 150px;
+      background: linear-gradient(rgba(100, 180, 255, 0.9), transparent);
+      top: -150px;
+      z-index: 0;
+      opacity: 0.8;
+      filter: blur(1px);
+      border-radius: 2px;
+      animation: fall 4s linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 0.8; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Selamat Ulang Tahun, Stephanieku! 🎂</h1>
+    <p>Hellow Cayangnya akuuuu, Happy Birthday yaaa stephaniekuuu!!!<br>
+    Sini jawab pertanyaan dulu, kalau benar nanti kamu dapat sesuatu dari ini hehehe</p>
+
+    <div class="question">
+      <label>Pertanyaan 1: Kapan pertama kali kita bertemu?<br><small>(Format jawaban: DDMMYYYY)</small></label>
+      <input type="text" id="q1" placeholder="Format: DDMMYYYY" />
+    </div>
+
+    <div class="question">
+      <label>Pertanyaan 2: Cewe paling cantik di dunia siapa?</label>
+      <select id="q2">
+        <option value="">-- Pilih jawaban --</option>
+        <option value="stephanie">A. Stephanie Renata Syah</option>
+        <option value="stephanie">B. Stephanie Renata Syah</option>
+        <option value="stephanie">C. Stephanie Renata Syah</option>
+        <option value="stephanie">D. Stephanie Renata Syah</option>
+      </select>
+    </div>
+
+    <div class="question">
+      <label>Pertanyaan 3: Kapan tanggal jadian kita?<br><small>(Format jawaban: DDMMYYYY)</small></label>
+      <input type="text" id="q3" placeholder="Format: DDMMYYYY" />
+    </div>
+
+    <div class="question">
+      <label>Pertanyaan 4: Seberapa kamu sayang sama chris kang? (0-100)</label>
+      <input type="range" id="q4" min="0" max="100" value="50" />
+      <span id="q4value">50</span>
+    </div>
+
+    <div class="question">
+      <label>Pertanyaan 5: Apa harapanmu di ulangtahunmu yang ke 24 ini?<br>
+      <small>(Jawab pribadi ke WA Chris Kang untuk mendapatkan jawabannya💬)</small></label>
+      <input type="text" id="q5" placeholder="Tulis di sini..." />
+    </div>
+
+    <button onclick="checkAnswers()">Lihat Hadiah 🎁</button>
+
+    <div class="result" id="result">
+      <h2>Selamat! Kamu berhasil, Stephanieku 💛</h2>
+      <p>Ini hadiah spesial dari aku 🎉</p>
+      <img src="photo.jpg" alt="Foto kenangan" />
+      <video controls src="video.mp4"></video>
+      <p style="margin-top:1rem; font-style: italic;">"Terima kasih sudah jadi orang paling indah dalam hidupku. I love you more each day."</p>
+    </div>
+  </div>
+
+  <audio autoplay loop>
+    <source src="birthday-acoustic.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    document.getElementById('q4').addEventListener('input', function () {
+      document.getElementById('q4value').innerText = this.value;
+    });
+
+    function checkAnswers() {
+      const q1 = document.getElementById("q1").value.trim();
+      const q2 = document.getElementById("q2").value;
+      const q3 = document.getElementById("q3").value.trim();
+      const q4 = parseInt(document.getElementById("q4").value);
+      const q5 = document.getElementById("q5").value.trim().toLowerCase();
+
+      if (q1 === "07082023" && q2 === "stephanie" && q3 === "09052024" && q4 === 100 && q5 === "ilopu") {
+        document.getElementById("result").style.display = "block";
+      } else {
+        alert("Coba lagi ya stephaniekuu, ada yang belum pas nih 💛");
+      }
+    }
+
+    // Floating hearts
+    function createLove() {
+      const love = document.createElement('div');
+      love.classList.add('love');
+      love.style.left = Math.random() * 100 + 'vw';
+      love.style.animationDuration = (5 + Math.random() * 5) + 's';
+      document.body.appendChild(love);
+      setTimeout(() => love.remove(), 10000);
+    }
+    setInterval(createLove, 300);
+
+    // Falling stars
+    function createStar() {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (2 + Math.random() * 3) + 's';
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), 4000);
+    }
+    setInterval(createStar, 150);
+  </script>
+</body>
+</html>
